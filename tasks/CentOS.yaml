@@ -8,7 +8,7 @@
 
 - name: Set LS Major Version Fact
   set_fact:
-    _logstash_major_version: "{{ logstash_version.split('.')[0] }}"
+    _logstash_major_version: "{{ logstash_version | int }}"
   when: "{{ logstash_version | version_compare('5.0', '>=') }}"
   tags:
     - install
