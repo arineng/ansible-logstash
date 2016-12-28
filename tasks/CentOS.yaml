@@ -20,12 +20,11 @@
     baseurl: "https://artifacts.elastic.co/packages/{{ _logstash_major_version }}.x/yum"
     gpgcheck: yes
     gpgkey: https://artifacts.elastic.co/GPG-KEY-elasticsearch
-    includepkgs:
-      - logstash
+    includepkgs: 'logstash'
     params:
       autorefresh: 1
       type: rpm-md
-  when: "{{ logstash_version | version_compare('5.0' '>=') }}"
+  when: logstash_version | version_compare('5.0', '>=')
   tags:
     - install
 
@@ -36,7 +35,7 @@
     baseurl: "http://packages.elastic.co/logstash/{{ logstash_version }}/centos"
     gpgcheck: yes
     gpgkey: https://artifacts.elastic.co/GPG-KEY-elasticsearch
-  when: "{{ logstash_version | version_compare('5.0' '<') }}"
+  when: logstash_version | version_compare('5.0', '<')
   tags:
     - install
 
