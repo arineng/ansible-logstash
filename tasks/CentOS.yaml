@@ -6,11 +6,18 @@
   tags:
      - install
 
+- name: Set LS Major Version Fact
+  set_fact:
+    _logstash_major_version: "{{ logstash_version.split('.')[0] }}"
+  when: {{ logstash_version | version_compare('5.0', '>=') }}
+  tags:
+    - install
+
 - name: Set yumrepo for LS > 5.x
   yum_repository:
-    name: "logstash-{{ logstash_version }}"
-    description: "Logstash repository for {{ logstash_version }}.x packages"
-    baseurl: "https://artifacts.elastic.co/packages/{{ logstash_version }}.x/yum"
+    name: "logstash-{{ _logstash_major_version }}.x"
+    description: "Logstash repository for {{ _logstash_major_version }}.x packages"
+    baseurl: "https://artifacts.elastic.co/packages/{{ _logstash_major_version }}.x/yum"
     gpgcheck: yes
     gpgkey: https://artifacts.elastic.co/GPG-KEY-elasticsearch
     includepkgs:
@@ -18,7 +25,7 @@
     params:
       autorefresh: 1
       type: rpm-md
-  when: logstash_version | version_compare('5.0' '>=')
+  when: {{ logstash_version | version_compare('5.0' '>=') }}
   tags:
     - install
 
@@ -29,7 +36,7 @@
     baseurl: "http://packages.elastic.co/logstash/{{ logstash_version }}/centos"
     gpgcheck: yes
     gpgkey: https://artifacts.elastic.co/GPG-KEY-elasticsearch
-  when: logstash_version | version_compare('5.0' '<')
+  when: {{ logstash_version | version_compare('5.0' '<') }}
   tags:
     - install
 
