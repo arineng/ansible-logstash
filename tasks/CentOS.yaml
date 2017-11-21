@@ -17,9 +17,9 @@
   yum_repository:
     name: "logstash-{{ _logstash_major_version }}.x"
     description: "Logstash repository for {{ _logstash_major_version }}.x packages"
-    baseurl: "https://artifacts.elastic.co/packages/{{ _logstash_major_version }}.x/yum"
+    baseurl: "{{ logstash_version_baseurl }}"
     gpgcheck: yes
-    gpgkey: https://artifacts.elastic.co/GPG-KEY-elasticsearch
+    gpgkey: "{{ logstash_gpgkey }}"
     includepkgs: 'logstash'
     params:
       autorefresh: 1

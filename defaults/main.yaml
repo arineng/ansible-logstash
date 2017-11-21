@@ -10,3 +10,5 @@ logstash_restart_on_change: true
 logstash_base_dir: "/opt/logstash"
 logstash_apt_repo: "deb http://packages.elastic.co/logstash/{{logstash_version}}/debian stable main"
 ls_conf_dir: "/etc/logstash/conf.d"
+logstash_gpgkey: "https://packages.elastic.co/GPG-KEY-elasticsearch"
+logstash_version_baseurl: "https://artifacts.elastic.co/packages/5.x/yum"

@@ -1,6 +1,6 @@
 [logstash-{{logstash_version}}]
 name=Logstash repository for {{logstash_version}}.x packages
-baseurl=http://packages.elastic.co/logstash/{{logstash_version}}/centos
+baseurl={{ logstash_repo_base_url }}
 gpgcheck=1
 gpgkey={{logstash_gpgkey}}
 enabled=1
